@@ -699,6 +699,7 @@
 
 	.gallery-filter-mobile button {
 		background: transparent;
+		color: #D2D2D2;
 	}
 
 	.gallery-filter-mobile .hidden {
@@ -1045,11 +1046,16 @@
 		background: transparent;
 		padding: 0;
 		margin-right: 60px;
+		color: #D2D2D2;
 	}
 
 	.gallery-filter button:last-child {
 		margin-right: 0;
 	}
+
+	.gallery-filter button.active {
+		text-decoration: line-through;	
+	}	
 
 	/* Main Logo */
 	#video-gallery-main-logo span {
