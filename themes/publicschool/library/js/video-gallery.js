@@ -162,20 +162,6 @@ var $ = jQuery;
 		bindEvents: function(){
 			var _this = this;
 
-			// $.address.change(function(event) {
-			// 	// _this.url.currentPath = event.path;
-			// 	// // check for #! to go straight work
-			// 	// // this.checkUrl();			
-			// 	// console.log('addres change from $.address.change');
-
-			// 	// if(_this.url.firstLoad){
-			// 	// 	_this.url.firstLoad = false;
-			// 	// } else {
-			// 	// 	_this.checkUrl();			
-			// 	// }
-			// 	// console.log(event);
-			// });
-
 			$.address.internalChange(function(event){
 				_this.checkUrl(event);
 			});
@@ -192,10 +178,34 @@ var $ = jQuery;
 				_this.setVideoHeight();
 			});
 
+			if(!Modernizr.touch){
+				_this.$galleryItems.hover(function(){
+					$(this).find('.hover-video-overlay').addClass('hovered');
+				}, function(){
+					$(this).find('.hover-video-overlay').removeClass('hovered');
+				});
+			}
+
 			_this.$galleryItemVideos.on('click', function(e){
 				e.preventDefault();
+				
+				if(Modernizr.touch){
+					$(this)
+						.closest('.gallery-item')
+						.siblings()
+						.find('.hover-video-overlay')
+						.removeClass('hovered');
 
-				_this.openVideoInOverlay($(this).closest('.gallery-item')[0]);
+					if($(this).find('.hover-video-overlay').is('.hovered')){
+						console.log('hovered once. Open it');
+						_this.openVideoInOverlay($(this).closest('.gallery-item')[0]);
+						$('.hover-video-overlay').removeClass('hovered');
+					} else {
+						$(this).find('.hover-video-overlay').addClass('hovered');	
+					}
+				} else {
+					_this.openVideoInOverlay($(this).closest('.gallery-item')[0]);
+				}
 			});
 
 			_this.$galleryItemVideoTitle.on('click', function(e){

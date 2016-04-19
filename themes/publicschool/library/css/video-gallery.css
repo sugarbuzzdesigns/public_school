@@ -781,11 +781,12 @@
 		content: "";
 		position: absolute;
 		top: 0;
-		left: -100%;
+		left: 0;
+		opacity: 0;
 		background: rgba(0,0,0,0.72);
 		height: 100%;
 		width: 100%;
-		transition: all 0.5s ease;
+		transition: all 0.3s ease;
 	}
 
 	.gallery-item .video-wrap .hover-video-overlay .content {
@@ -796,8 +797,8 @@
 		padding-bottom: 20px;
 	}
 
-	.gallery-item .video-wrap:hover .hover-video-overlay {
-		left: 0;
+	.gallery-item .video-wrap .hover-video-overlay.hovered {
+		opacity: 1;
 	}
 
 	.gallery-item .video-wrap .hover-video-overlay .title {	
