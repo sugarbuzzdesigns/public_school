@@ -26,9 +26,16 @@ if(count($customPostTaxonomies) > 0)
 }
 ?>
 
-<div class="gallery-filter">
+<div class="gallery-filter-mobile">
 	<header><span>All</span><i class="icon-down-arrow"></i><i class="icon-close-menu"></i></header>
 	<button class="filter show-all hidden" data-filter="all">All</button>
+	<?php foreach($cats as $cat){ ?>
+		<button class="filter" data-filter=".<?php echo $cat->slug; ?>"><?php echo $cat->slug; ?></button>
+	<?php } ?>	
+</div>
+
+<div class="gallery-filter">
+	<button class="filter show-all" data-filter="all">All</button>
 	<?php foreach($cats as $cat){ ?>
 		<button class="filter" data-filter=".<?php echo $cat->slug; ?>"><?php echo $cat->slug; ?></button>
 	<?php } ?>	

@@ -47,6 +47,18 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'eb_garamond12_italic';
+    src: url('../fonts/ebgaramond12-italic-webfont.eot');
+    src: url('../fonts/ebgaramond12-italic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/ebgaramond12-italic-webfont.woff2') format('woff2'),
+         url('../fonts/ebgaramond12-italic-webfont.woff') format('woff'),
+         url('../fonts/ebgaramond12-italic-webfont.ttf') format('truetype'),
+         url('../fonts/ebgaramond12-italic-webfont.svg#eb_garamond12_italic') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
 .gallery .mix {
 	display: none;
 }
@@ -326,6 +338,7 @@
 	and (min-width: 320px) {
 
 	body {
+		/*background: pink;*/
 		background: #202020;
 		color: #fff;
 		font-size: 16px;
@@ -572,7 +585,8 @@
 		text-align: center;
 		display: block;
 		margin-top: 50px;
-		margin-bottom: 20px;		
+		margin-bottom: 20px;	
+		transition: all 0.5s;	
 	}
 
 	#video-gallery-main-logo img {
@@ -592,14 +606,23 @@
 	}
 
 	.minimal-logo {
+		opacity: 0;
+		transition: all 0.5s;
 	    width: 14px;
-	    position: relative;
-	    top: 15px;
-	    left: 30px;		
+	    position: absolute;
+	    bottom: 24px;
+	    left: 30px;	
+	}
+
+	.galleryFadeIn.minimal-logo {
+		opacity: 1;
 	}
 
 	/* Filter Navigation */
 	.gallery-filter {
+		display: none;
+	}
+	.gallery-filter-mobile {
 		width: 100%;
 		text-align: left;
 		overflow: hidden;
@@ -608,18 +631,20 @@
 		box-sizing: border-box;
 	}
 
-	.gallery-filter:focus,
-	.gallery-filter button:focus {
+	.gallery-filter-mobile:focus,
+	.gallery-filter-mobile button:focus,
+	.gallery-filter button:focus  {
 		outline: none;
 		border: none;
 	}
 
-	.gallery-filter.initialized {
+	.gallery-filter-mobile.initialized {
 		opacity: 1;
 	}
 
+	.gallery-filter-mobile button,
 	.gallery-filter button,
-	.gallery-filter header {
+	.gallery-filter-mobile header{
 		height: 39px;
 		padding: 0 20px;
 		background: #282828;
@@ -634,11 +659,11 @@
 		padding-top: 8px;
 	}
 
-	.gallery-filter header {
+	.gallery-filter-mobile header {
 		position: relative;
 	}
 
-	.gallery-filter i {
+	.gallery-filter-mobile i {
 		display: block;
 		position: absolute;
 		right: 20px;
@@ -647,14 +672,14 @@
 		transition: all 0.5s;
 	}
 
-	.gallery-filter .icon-down-arrow {
+	.gallery-filter-mobile .icon-down-arrow {
 	    width: 14px;
 	    height: 7px;
 		background: url(../images/icons/down-arrow-icon.png) no-repeat;
 		background-size: 100%;
 	}
 
-	.gallery-filter .icon-close-menu {
+	.gallery-filter-mobile .icon-close-menu {
 		width: 13px;
 		height: 14px;
 		background: url(../images/icons/menu-close-icon.png) no-repeat;
@@ -662,25 +687,25 @@
 		opacity: 0;
 	}
 
-	.gallery-filter.open .icon-down-arrow {
+	.gallery-filter-mobile.open .icon-down-arrow {
 		opacity: 0;
 	}
 
-	.gallery-filter.open .icon-close-menu {
+	.gallery-filter-mobile.open .icon-close-menu {
 		-webkit-transition-delay: 0.2s; /* Safari */
 	    transition-delay: 0.2s;		
 		opacity: 1;
 	}
 
-	.gallery-filter button {
+	.gallery-filter-mobile button {
 		background: transparent;
 	}
 
-	.gallery-filter .hidden {
+	.gallery-filter-mobile .hidden {
 		display: none !important;
 	}
 
-	.gallery-filter button + button {
+	.gallery-filter-mobile button + button {
 		background: transparent;
 		display: none;
 	}
@@ -723,10 +748,12 @@
 
 	.title {
 		margin-bottom: 13px;
-		font-size: 1.250em;
+		font-size: 15px;
+		letter-spacing: 1.25px;
 		line-height: normal;
 		margin-top: 0;
 		cursor: pointer;
+		font-family: 'blender_promedium';
 	}
 
 	.category {
@@ -745,27 +772,50 @@
 		text-decoration: none;
 	}
 
-	.gallery-item:hover .video-placeholder {
-		-webkit-filter: grayscale(100%);
-				filter: grayscale(100%);		
+	.gallery-item .video-wrap {
+		overflow: hidden;
 	}
 
-	.gallery-item .video-wrap:after {
+	.gallery-item .video-wrap .hover-video-overlay {
 		content: "";
 		position: absolute;
 		top: 0;
-		left: 0;
-		opacity: 0;
-		background: #000000;
+		left: -100%;
+		background: rgba(0,0,0,0.72);
 		height: 100%;
 		width: 100%;
 		transition: all 0.5s ease;
 	}
 
-	.gallery-item:hover .video-wrap:after {
-		opacity: 0.7;
+	.gallery-item .video-wrap .hover-video-overlay .content {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		padding-left: 25px;
+		padding-bottom: 20px;
 	}
 
+	.gallery-item .video-wrap:hover .hover-video-overlay {
+		left: 0;
+	}
+
+	.gallery-item .video-wrap .hover-video-overlay .title {	
+		color: #fff;
+		font-size: 15px;
+		letter-spacing: 1.25px;
+		margin-bottom: 5px;
+	}
+
+	.gallery-item .video-wrap .hover-video-overlay .category {
+		color: #fff;
+		font-family: 'eb_garamond12_italic';
+		text-transform: capitalize;
+		font-size: 14px;
+	}
+
+	.gallery-item .video-wrap .hover-video-overlay .category a {
+		color: #fff;
+	}	
 
 	/* Gallery overlay */
 	.gallery-overlay .close-video {
@@ -976,6 +1026,42 @@
 }
 
 @media only screen and (min-width: 767px) {
+	#video-gallery-main-logo {
+		margin-top: 80px;
+	}
+
+	.gallery-filter-mobile {
+		display: none;
+	}
+
+	.gallery-filter {
+		display: block;
+		text-align: center;
+	}
+	
+	.gallery-filter button {
+		display: inline-block;
+		width: auto;
+		background: transparent;
+		padding: 0;
+		margin-right: 60px;
+	}
+
+	.gallery-filter button:last-child {
+		margin-right: 0;
+	}
+
+	/* Main Logo */
+	#video-gallery-main-logo span {
+	    display: block;
+	    padding-bottom: 8px;
+	}
+
+	/* Main Gallery */
+	.gallery {
+		padding-top: 35px;
+	}
+
 	.wrap .svg-container svg line, .wrap .svg-container svg path {
 		stroke: #3B3B3B;
 		stroke-width: 0.3px;
@@ -1085,15 +1171,39 @@
 
 /* Desktop Size 2 */
 @media only screen and (min-width: 1045px) {
-	.filter.show-all {
+	#video-gallery-main-logo {
+		margin-top: 116px;
+	}
+
+	.gallery-filter-mobile {
 		display: none;
 	}
 
-	.wrap .svg-container svg {
-		width: 110%;
+	.gallery-filter {
+		display: block;
+		text-align: center;
 	}
 	
-	.gallery-overlay .copy .col + .col .content {
-		/*padding-right: 50px;*/
+	.gallery-filter button {
+		display: inline-block;
+		width: auto;
+		background: transparent;
+		padding: 0;
+		margin-right: 60px;
+	}
+
+	.gallery-filter button:last-child {
+		margin-right: 0;
+	}
+
+	/* Main Logo */
+	#video-gallery-main-logo span {
+	    display: block;
+	    padding-bottom: 8px;
+	}
+
+	/* Main Gallery */
+	.gallery {
+		padding-top: 35px;
 	}
 }

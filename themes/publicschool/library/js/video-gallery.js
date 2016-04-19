@@ -404,6 +404,7 @@ var $ = jQuery;
 		},
 
 		showOverlayElements: function(){
+			$('.minimal-logo').addClass('galleryFadeIn');
 			this.$galleryNav.addClass('galleryFadeIn');
 			this.$galleryOverlayItemWrap.addClass('galleryFadeIn');
 		},

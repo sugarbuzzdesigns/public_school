@@ -4,9 +4,9 @@ var ps = ps || {};
 	ps.MobileMenu = {
 		init: function(){
 			// Cache jQuery Selectors
-			this.$filterMenu = $('.gallery-filter');
+			this.$filterMenu = $('.gallery-filter-mobile');
 			this.$filterMenuHeader = $('header', this.$filterMenu);
-			this.$filterHeaderSpan = $('.gallery-filter header span');
+			this.$filterHeaderSpan = $('.gallery-filter-mobile header span');
 			this.$filterButtons = $('button', this.$filterMenu);
 			this.$seeAllBtn = $('button', this.$filterMenu).first();
 

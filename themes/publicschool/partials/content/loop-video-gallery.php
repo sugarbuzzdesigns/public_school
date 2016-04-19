@@ -50,10 +50,14 @@
 					<div class="gallery-video">
 						<div class="video-wrap">
 							<div class="video-placeholder" data-video-id="gallery_video_<?php echo get_the_ID(); ?>" class="video-js vjs-default-skin" width="auto" height="auto" controls style="background-image:url(<?php echo $poster; ?>);"></div>
+							<div class="hover-video-overlay">
+								<div class="content">
+									<p class="title"><?php the_title(); ?></p>
+									<p class="category"><a href="<?php echo get_site_url() ?><?php echo add_query_arg( array('category' => $catLower), '/video-galleries' ); ?>"><?php echo $cats[0]->name; ?></a></p>
+									<p class="description hide"><?php echo get_the_content(); ?></p>								
+								</div>	
+							</div>
 						</div>
-						<p class="title" style="display: none;"><?php the_title(); ?></p>
-						<p class="category" style="display: none;"><a href="<?php echo get_site_url() ?><?php echo add_query_arg( array('category' => $catLower), '/video-galleries' ); ?>"><?php echo $cats[0]->name; ?></a></p>
-						<p class="description hide"><?php echo get_the_content(); ?></p>
 						<!-- <p class="share-link hide"></p> -->
 					</div>
 				</div>	
